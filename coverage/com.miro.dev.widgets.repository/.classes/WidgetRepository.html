@@ -1,0 +1,63 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: WidgetRepository</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.miro.dev.widgets.repository</a> ]
+</div>
+
+<h1>Coverage Summary for Class: WidgetRepository (com.miro.dev.widgets.repository)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">WidgetRepository</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.miro.dev.widgets.repository;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.miro.dev.widgets.model.Limit;
+<i>4</i>&nbsp;import com.miro.dev.widgets.model.Widget;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.util.List;
+<i>7</i>&nbsp;import java.util.Optional;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;public interface WidgetRepository {
+<i>10</i>&nbsp;    Optional&lt;Widget&gt; getById(Long id);
+<i>11</i>&nbsp;    List&lt;Widget&gt; getAll(Limit limit);
+<i>12</i>&nbsp;    Widget create(Widget widget);
+<i>13</i>&nbsp;    Widget update(Widget widget);
+<i>14</i>&nbsp;    void delete(Long id);
+<i>15</i>&nbsp;    void clear();
+<i>16</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-10-16 09:26</div>
+</div>
+</body>
+</html>

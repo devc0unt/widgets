@@ -1,0 +1,148 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: WidgetService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.miro.dev.widgets.service</a> ]
+</div>
+
+<h1>Coverage Summary for Class: WidgetService (com.miro.dev.widgets.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WidgetService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/ 18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.miro.dev.widgets.service;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.miro.dev.widgets.exceptions.InvalidWidgetException;
+<i>4</i>&nbsp;import com.miro.dev.widgets.exceptions.WidgetNotFoundException;
+<i>5</i>&nbsp;import com.miro.dev.widgets.model.Limit;
+<i>6</i>&nbsp;import com.miro.dev.widgets.model.Widget;
+<i>7</i>&nbsp;import com.miro.dev.widgets.repository.WidgetRepository;
+<i>8</i>&nbsp;import org.springframework.stereotype.Service;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;import java.util.List;
+<i>11</i>&nbsp;import java.util.Objects;
+<i>12</i>&nbsp;import java.util.stream.Stream;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;/**
+<i>15</i>&nbsp; * Service that passes requests and responses
+<i>16</i>&nbsp; * between controller and repository,
+<i>17</i>&nbsp; * and applies checks
+<i>18</i>&nbsp; */
+<i>19</i>&nbsp;@Service
+<i>20</i>&nbsp;public class WidgetService {
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    private final WidgetRepository repository;
+<i>23</i>&nbsp;
+<b class="fc"><i>24</i>&nbsp;    public WidgetService(WidgetRepository repository) {</b>
+<b class="fc"><i>25</i>&nbsp;        this.repository = repository;</b>
+<b class="fc"><i>26</i>&nbsp;    }</b>
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    public Widget getById(Long id) {
+<b class="fc"><i>29</i>&nbsp;        if (Objects.isNull(id)) throw new InvalidWidgetException();</b>
+<b class="fc"><i>30</i>&nbsp;        return repository.getById(id).orElseThrow(WidgetNotFoundException::new);</b>
+<i>31</i>&nbsp;    }
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    public List&lt;Widget&gt; getAll(Limit limit) {
+<b class="fc"><i>34</i>&nbsp;        return repository.getAll(limit);</b>
+<i>35</i>&nbsp;    }
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    public Void delete(Long id) {
+<b class="fc"><i>38</i>&nbsp;        repository.delete(id);</b>
+<b class="fc"><i>39</i>&nbsp;        return null;</b>
+<i>40</i>&nbsp;    }
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    public Widget create(Widget widget) {
+<b class="fc"><i>43</i>&nbsp;        check(widget);</b>
+<b class="fc"><i>44</i>&nbsp;        return repository.create(widget);</b>
+<i>45</i>&nbsp;    }
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    public Widget update(Widget widget) {
+<b class="fc"><i>48</i>&nbsp;        getById(widget.getId());</b>
+<b class="fc"><i>49</i>&nbsp;        check(widget);</b>
+<b class="fc"><i>50</i>&nbsp;        return repository.update(widget);</b>
+<i>51</i>&nbsp;    }
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    /**
+<i>54</i>&nbsp;     * Check that widget has x, y, width and height,
+<i>55</i>&nbsp;     * and that width and height is not negative
+<i>56</i>&nbsp;     * @param widget instance of Widget
+<i>57</i>&nbsp;     */
+<i>58</i>&nbsp;    private void check(Widget widget) {
+<b class="fc"><i>59</i>&nbsp;        if (Stream.of(widget.getXIndex(), widget.getYIndex(), widget.getWidth(), widget.getHeight())</b>
+<b class="fc"><i>60</i>&nbsp;                .anyMatch(Objects::isNull)) throw new InvalidWidgetException();</b>
+<i>61</i>&nbsp;
+<b class="fc"><i>62</i>&nbsp;        if (Stream.of(widget.getWidth(), widget.getHeight())</b>
+<b class="fc"><i>63</i>&nbsp;                .anyMatch(el -&gt; el &lt; 0)) throw new InvalidWidgetException();</b>
+<b class="fc"><i>64</i>&nbsp;    }</b>
+<i>65</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-10-16 09:26</div>
+</div>
+</body>
+</html>
